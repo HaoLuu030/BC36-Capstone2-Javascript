@@ -24,6 +24,100 @@
     <link rel="stylesheet" href="../../assets/css/styles.css" />
   </head>
   <body>
+    <header class="productHeader pb-5">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="#">
+            <img
+              src="../../assets/img/alogo-1.webp"
+              width="90"
+              height="50"
+              class="d-inline-block align-top"
+              alt=""
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#"
+                  >Home <span class="sr-only">(current)</span></a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+              </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <select name="productBrand" id="productBrand">
+                <option value="0">Choose a brand name</option>
+                <option value="1">Samsung</option>
+                <option value="2">Iphone</option>
+              </select>
+            </form>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <div class="productGallery">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card productGallery__productItem">
+              <a href="#" class="productGallery__productName">
+                <h5 class="card-title">IphoneX</h5></a
+              >
+              <div class="productGallery__img-container">
+                <img
+                  src="https://cdn.tgdd.vn/Products/Images/42/114115/iphone-x-64gb-hh-600x600.jpg"
+                  class="card-img-top"
+                  alt="..."
+                />
+              </div>
+              <div class="card-body productGallery__productContent">
+                <div class="productGallery__pricing">
+                  <p class="card-text productGallery__productPrice">$1000</p>
+                  <button
+                    onclick="this.classList.toggle('like')"
+                    class="btn-style like-button"
+                  >
+                    <span class="fa-solid fa-heart"></span>
+                  </button>
+                </div>
+              </div>
+              <div class="productGallery__popUp">
+                <div class="extraFeatures">
+                  <button class="btn-style">
+                    <span class="fa-solid fa-eye"></span>
+                    <span>View</span>
+                  </button>
+                  <button class="btn-style">
+                    <span class="fa fa-shopping-cart"></span>
+                    <span>Add</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Axios -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- Bootstrap 4 JS -->
