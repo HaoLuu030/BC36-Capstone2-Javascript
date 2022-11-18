@@ -1,0 +1,153 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.btn-style {
+  color: gray;
+  background: none;
+  border: none;
+  position: relative;
+  z-index: 2;
+}
+
+.btn-style i {
+  font-size: 14px;
+  color: inherit;
+  transition: all 0.5s;
+  height: 35px;
+  width: 35px;
+  line-height: 35px;
+  text-align: center;
+  border-radius: 50%;
+  border: 1.5px solid gray;
+}
+
+.btn-style:hover i {
+  background: gray;
+  color: white;
+}
+
+/* Header */
+.btn-style.cart-btn i {
+  font-size: 20px;
+  border: none;
+}
+
+.btn-style.cart-btn:hover i {
+  color: indigo;
+  background: none;
+}
+
+/* Item */
+
+.productGallery {
+  padding-bottom: 200px;
+}
+
+.productGallery__productItem {
+  padding: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+  overflow: hidden;
+  position: relative;
+}
+
+.productGallery__productItem:hover {
+  box-shadow: 2px 5px 5px 0px rgb(0 0 0 / 30%);
+}
+
+.productGallery__productContent {
+  width: 100%;
+  padding: 0px 5px 10px;
+}
+
+.productGallery__productName {
+  color: #0062bd;
+  transition: all 0.3s;
+}
+.productGallery__productName h5 {
+  overflow: hidden;
+  word-wrap: normal;
+  font-size: 20px;
+  margin: 0;
+}
+
+.in-stock {
+  color: green;
+  font-size: 15px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.five-stars {
+  font-size: 16px;
+  color: yellow;
+  margin: 4px 0;
+}
+
+.productGallery__img-container {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.productGallery__img-container img {
+  width: 100%;
+}
+
+.productGallery__productName:hover {
+  color: #fed700;
+  text-decoration: none;
+}
+
+.productGallery__productPrice {
+  font-size: 25px;
+  color: firebrick;
+  font-weight: bold;
+  margin: 0;
+}
+
+.productGallery__mini-menu {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 130%);
+  opacity: 0;
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+  transition: all 0.1s;
+}
+
+.productGallery__productItem:hover .productGallery__mini-menu {
+  opacity: 1;
+  transform: translate(-50%, 100%);
+}
+
+/* Modal styling */
+.details-modal {
+  min-width: 60% !important;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) !important;
+}
+
+.details-modal .modal-image-container {
+  width: 100%;
+  padding: 20px;
+}
+.details-modal .modal-image-container img {
+  width: 80%;
+}
+
+.btn-style.like i {
+  border: 1.5px solid red;
+  color: red;
+}
+.btn-style.like:hover i {
+  border: 1.5px solid red;
+  background: transparent;
+}

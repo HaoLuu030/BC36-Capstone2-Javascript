@@ -1,8 +1,7 @@
 class ProductService {
-  productList = [];
-  getProduct = () => {
+  getList = () => {
     return axios({
-      url: "https://mockapi.io/projects/63661fa279b0914b75c9b90c/products",
+      url: "https://63661fa279b0914b75c9b90b.mockapi.io/products",
       method: "GET",
     });
   };
