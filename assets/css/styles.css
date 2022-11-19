@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  font-family: "Source Sans Pro", sans-serif;
+}
+
 .btn-style {
   color: gray;
   background: none;
@@ -30,9 +35,32 @@
 }
 
 /* Header */
+
+header.productHeader {
+  background: black;
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+
 .btn-style.cart-btn i {
   font-size: 20px;
   border: none;
+  position: relative;
+}
+
+span#quantity {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: black;
+  line-height: 15px;
+  font-size: 12px;
+  border-radius: 50%;
+  top: 0px;
+  left: 24px;
+  color: white;
+  transition: all 0.5s;
 }
 
 .btn-style.cart-btn:hover i {
@@ -143,11 +171,16 @@
   width: 80%;
 }
 
+.details-modal .specifications li {
+  font-size: 20px;
+}
+
 .btn-style.like i {
   border: 1.5px solid red;
-  color: red;
+  color: white;
+  background: red;
 }
 .btn-style.like:hover i {
   border: 1.5px solid red;
-  background: transparent;
+  background: red;
 }
