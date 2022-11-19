@@ -1,5 +1,4 @@
 import { ProductService } from "../services/product.js";
-import { Product } from "../models/product.js";
 import { CartItem } from "../models/cartItem.js";
 
 const productService = new ProductService();
