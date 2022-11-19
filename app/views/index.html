@@ -31,36 +31,15 @@
     <link rel="stylesheet" href="../../assets/css/styles.css" />
   </head>
   <body>
-    <header class="productHeader">
+    <header class="productHeader bg-dark">
       <div class="container">
-        <nav class="navbar navbar-expand-lg">
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div
-            class="collapse navbar-collapse justify-content-end"
-            id="navbarSupportedContent"
-          >
+        <nav class="navbar justify-content-end">
+          <div class="justify-content-end" id="navbarSupportedContent">
             <div class="right d-flex align-items-center">
-              <form class="form-inline my-2 my-lg-0">
-                <select name="productBrand" id="productBrand">
-                  <option value="0">Choose a brand name</option>
-                  <option value="1">Samsung</option>
-                  <option value="2">Iphone</option>
-                </select>
-              </form>
               <button class="btn-style cart-btn">
-                <i class="fa fa-shopping-cart"></i>
-                <span id="quantity"></span>
+                <i class="fa fa-shopping-cart">
+                  <span id="quantity"></span>
+                </i>
               </button>
             </div>
           </div>
@@ -83,18 +62,18 @@
       aria-hidden="true"
     >
       <div id="details-modal" class="modal-dialog details-modal">
-        <div class="modal-content">
-          <div class="modal-body" id="details-modal-body"></div>
-          <div class="modal-footer">
+        <div class="modal-content border-0">
+          <div class="modal-body pb-0" id="details-modal-body"></div>
+          <div class="modal-footer bg-dark">
+            <button onclick="addToCart()" type="button" class="btn btn-warning">
+              Add to Cart <i class="fa fa-shopping-cart"></i>
+            </button>
             <button
               type="button"
               class="btn btn-secondary"
               data-dismiss="modal"
             >
               Close
-            </button>
-            <button type="button" class="btn btn-warning">
-              Add to Cart <i class="fa fa-shopping-cart"></i>
             </button>
           </div>
         </div>

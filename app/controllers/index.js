@@ -20,7 +20,7 @@ const getProductList = () => {
 const renderProductList = (data) => {
   const html = domId("productGallery");
   const content = data.reduce((total, element) => {
-    total += `<div class="col-12 col-md-6 col-lg-3">
+    total += `<div class="col-12 col-sm-6 col-lg-3 px-2">
     <div class="card productGallery__productItem">
       <div class="productGallery__img-container">
         <img
@@ -81,16 +81,16 @@ window.openInfoModal = (id) => {
   <div class="col-6">
     <div class="modal-extraInformation">
       <h1>${chosenProduct.name}</h1>
-      <ul class="specifications">
+      <ul class="specifications pb-3">
         <li>${chosenProduct.desc}</li>
         <li>Màn hình: ${chosenProduct.screen}</li>
         <li>Camera Sau: ${chosenProduct.backCamera}</li>
         <li>Camera Trước: ${chosenProduct.frontCamera} 7 MP</li>
       </ul>
       <div class="row align-items-center">
-        <div class="col-7"><h1 style="color: brown">$ ${chosenProduct.price}</h1></div>
-        <div style="color: green; font-weight: bold" class="col5">
-          <span>Còn hàng</span>
+        <div class="col-7"><h2>$ ${chosenProduct.price}</h2></div>
+        <div class="col5">
+          <span id="inStock">Còn hàng</span>
         </div>
       </div>
     </div>
