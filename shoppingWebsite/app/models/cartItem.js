@@ -1,7 +1,10 @@
 export class CartItem {
-  constructor(id, item, quantity) {
-    this.id = id;
+  constructor(item, quantity) {
     this.item = { ...item };
     this.quantity = quantity;
   }
+
+  calcPrice = () => {
+    return this.item.price * this.quantity;
+  };
 }

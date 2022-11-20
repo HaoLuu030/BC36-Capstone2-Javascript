@@ -106,10 +106,10 @@ window.openInfoModal = (id) => {
   type="button"
   class="btn btn-warning"
 >
-  Add to Cart <i class="fa fa-shopping-cart"></i>
+  Thêm vào giỏ <i class="fa fa-shopping-cart"></i>
 </button>
 <button type="button" class="btn btn-secondary" data-dismiss="modal">
-  Close
+  Đóng
 </button>
 `;
   domId("details-modal-body").innerHTML = bodyContent;
@@ -169,7 +169,7 @@ window.renderCart = () => {
   }, 0);
   if (cart.length === 0) {
     bodyContent =
-      "<span class='emptyCart'>Bạn Chưa có sản phẩm nào trong giỏ</span>";
+      "<span class='emptyCart'>Bạn chưa có sản phẩm nào trong giỏ</span>";
   } else {
     bodyContent = cart.reduce((total, element) => {
       total += `
@@ -220,6 +220,7 @@ window.renderCart = () => {
 
 <div class="modal-buttons">
   <button
+  onclick="purchase()"
     type="button"
     class="btn btn-success"
   >
@@ -276,6 +277,52 @@ window.clearCart = () => {
     renderQuantity();
     alert("Xóa giỏ hàng thành công");
   }
+};
+
+window.purchase = () => {
+  console.log();
+  if (cart.length === 0) {
+    alert("Không có hàng trong giỏ");
+  } else {
+    cart = [];
+    setLocalStorage();
+    renderCart();
+    renderQuantity();
+    alert("Thanh toán thành công");
+  }
+};
+
+window.renderType = () => {
+  let typeList = [
+    ...productList.reduce((total, element) => {
+      if (!total.includes(element.type)) {
+        total.push(element.type);
+      }
+      return total;
+    }, []),
+  ];
+  const content = typeList.reduce((total, element) => {
+    total += `<option>${element}</option>`;
+    return total;
+  }, "");
+
+  domId("dropdown-list").innerHTML =
+    "<option value='all'>Tất cả</option>".concat(content);
+};
+
+domId("dropdown-list").onchange = (event) => {
+  const value = event.target.value;
+  const selectedProducts = productList.filter((element) => {
+    if (element.type === value) {
+      return true;
+    }
+
+    if (value === "all") {
+      return true;
+    }
+  });
+
+  renderProductList(selectedProducts);
 };
 
 window.onload = () => {

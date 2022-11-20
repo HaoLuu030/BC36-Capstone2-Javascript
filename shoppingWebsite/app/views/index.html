@@ -27,6 +27,11 @@
       href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap"
       rel="stylesheet"
     />
+    <!-- Animate CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
     <!-- Main CSS -->
     <link rel="stylesheet" href="../../assets/css/styles.css" />
   </head>
@@ -36,7 +41,20 @@
         <nav class="navbar justify-content-end">
           <div class="justify-content-end" id="navbarSupportedContent">
             <div class="right d-flex align-items-center">
-              <button class="btn-style cart-btn">
+              <button
+                onclick="renderType()"
+                data-toggle="modal"
+                data-target="#searchModal"
+                class="btn-style cart-btn pr-3"
+              >
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+              <button
+                data-toggle="modal"
+                data-target="#cartModal"
+                class="btn-style cart-btn"
+                onclick="renderCart()"
+              >
                 <i class="fa fa-shopping-cart">
                   <span id="quantity"></span>
                 </i>
@@ -64,21 +82,69 @@
       <div id="details-modal" class="modal-dialog details-modal">
         <div class="modal-content border-0">
           <div class="modal-body pb-0" id="details-modal-body"></div>
-          <div class="modal-footer bg-dark">
-            <button onclick="addToCart()" type="button" class="btn btn-warning">
-              Add to Cart <i class="fa fa-shopping-cart"></i>
-            </button>
+          <div id="details-modal-footer" class="modal-footer bg-dark"></div>
+        </div>
+      </div>
+    </div>
+    <!-- Details modal end -->
+
+    <!-- Cart modal -->
+    <div
+      class="modal fade"
+      id="cartModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog cartPopUp animate__animated animate__slideInRight"
+      >
+        <div class="modal-content cartPopUpContent">
+          <div class="modal-header cartPopUp-header">
+            <h5 class="modal-title" id="exampleModalLabel">Giỏ hàng</h5>
             <button
               type="button"
-              class="btn btn-secondary"
+              class="close"
               data-dismiss="modal"
+              aria-label="Close"
             >
-              Close
+              <span aria-hidden="true">&times;</span>
             </button>
+          </div>
+          <div class="modal-body">
+            <table id="cart-modal-body"></table>
+          </div>
+          <div
+            id="cart-modal-footer"
+            class="modal-footer justify-content-around"
+          ></div>
+        </div>
+      </div>
+    </div>
+    <!-- Cart modal end-->
+    <!-- Search modal -->
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="searchModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Vui lòng chọn loại sản phẩm
+            </h5>
+            <form>
+              <select name="Type" id="dropdown-list"></select>
+            </form>
           </div>
         </div>
       </div>
     </div>
+    <!-- Search modal end -->
 
     <!-- Axios -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
