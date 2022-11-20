@@ -6,22 +6,26 @@ const domId = (id) => {
   return document.getElementById(id);
 };
 
+const findIndexbyId = (id) => {
+  return cart.findIndex((element) => element.item.id === id);
+};
+
 let productList = [];
 let cart = [];
 //get product list from dtb
 const getProductList = () => {
   productService.getList().then((response) => {
     productList = [...response.data];
-    renderProductList(response.data);
+    renderProductList();
   });
 };
 //render product list
-const renderProductList = (data) => {
+const renderProductList = (data = productList) => {
   const html = domId("productGallery");
   const content = data.reduce((total, element) => {
     total += `<div class="col-12 col-sm-6 col-lg-3 px-2">
     <div class="card productGallery__productItem">
-      <div class="productGallery__img-container">
+      <div class="img-container">
         <img
           src="${element.img}"
           class="card-img-top"
@@ -61,9 +65,9 @@ const renderProductList = (data) => {
 // Show product detail function
 window.openInfoModal = (id) => {
   const chosenProduct = productList.find((element) => element.id === id);
-  const content = `<div class="row">
+  const bodyContent = `<div class="row">
   <div class="col-6">
-    <div class="modal-image-container">
+    <div class="img-container">
       <img
         src="${chosenProduct.img}"
         alt=""
@@ -95,21 +99,40 @@ window.openInfoModal = (id) => {
     </div>
   </div>
 </div>`;
-  domId("details-modal-body").innerHTML = content;
+
+  const footerContent = `
+  <button
+  onclick="addToCart('${chosenProduct.id}')"
+  type="button"
+  class="btn btn-warning"
+>
+  Add to Cart <i class="fa fa-shopping-cart"></i>
+</button>
+<button type="button" class="btn btn-secondary" data-dismiss="modal">
+  Close
+</button>
+`;
+  domId("details-modal-body").innerHTML = bodyContent;
+  domId("details-modal-footer").innerHTML = footerContent;
 };
 //Add to Cart function
 window.addToCart = (id) => {
   const chosenProduct = productList.find((element) => element.id === id);
-  const cartItem = new CartItem(id, chosenProduct, 1);
+  const cartItem = new CartItem(chosenProduct, 1);
   // check if the item has already been in the cart
-  if (cart.find((element) => element.id === id)) {
-    const idx = cart.findIndex((element) => element.id === id);
+  if (
+    cart.find((element) => {
+      return element.item.id === id;
+    })
+  ) {
+    const idx = findIndexbyId(id);
     cart[idx].quantity += 1;
   } else {
     cart.push(cartItem);
   }
   setLocalStorage();
   renderQuantity();
+  alert("Thêm sản phẩm thành công!");
 };
 
 const renderQuantity = () => {
@@ -130,7 +153,128 @@ const setLocalStorage = () => {
 const getLocalStorage = () => {
   const stringify = localStorage.getItem("CART_LIST");
   if (stringify) {
-    return JSON.parse(stringify);
+    const data = JSON.parse(stringify);
+    //map data to get the method back
+    return data.map((element) => {
+      return new CartItem(element.item, element.quantity);
+    });
+  }
+};
+
+window.renderCart = () => {
+  let bodyContent = "";
+  const priceSum = cart.reduce((total, element) => {
+    total += element.calcPrice();
+    return total;
+  }, 0);
+  if (cart.length === 0) {
+    bodyContent =
+      "<span class='emptyCart'>Bạn Chưa có sản phẩm nào trong giỏ</span>";
+  } else {
+    bodyContent = cart.reduce((total, element) => {
+      total += `
+      <tr class="row align-items-center pb-3 CartItem">
+      <td class="col-3">
+        <div class="img-container">
+          <img
+            src="${element.item.img}"
+            alt=""
+          />
+        </div>
+      </td>
+      <td class="col-2">
+        <p>${element.item.name}</p>
+      </td>
+      <td class="col-2">
+        <div class="quantity-modifier">
+          <button onclick="decreaseItem('${
+            element.item.id
+          }')" class="btn-style btn-quantity-modifier">
+          <i class="fa-solid fa-minus"></i>
+          </button>
+          ${element.quantity}
+          <button onclick="increaseItem('${
+            element.item.id
+          }')" class="btn-style btn-quantity-modifier">
+          <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+      </td>
+      <td class="col-2">$ ${element.calcPrice()}</td>
+      <td class="col-2">
+        <button onclick="deleteProduct('${
+          element.item.id
+        }')" class="btn-deleteProduct">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+      `;
+      return total;
+    }, "");
+  }
+  const footerContent = `           
+<div class="total">
+  <span>Total: $ ${priceSum}</span>
+</div>
+
+<div class="modal-buttons">
+  <button
+    type="button"
+    class="btn btn-success"
+  >
+    Thanh toán   <i class="fa-solid fa-money-check-dollar"></i>
+  </button>
+  <button
+  onclick="clearCart()"
+    type="button"
+    class="btn btn-danger"
+  >
+    Xóa giỏ hàng <i class="fa-solid fa-trash"></i>
+  </button>
+</div>`;
+
+  domId("cart-modal-body").innerHTML = bodyContent;
+  domId("cart-modal-footer").innerHTML = footerContent;
+};
+
+window.decreaseItem = (id) => {
+  const idx = findIndexbyId(id);
+  if (cart[idx].quantity === 1) {
+    deleteProduct(id);
+  } else {
+    cart[idx].quantity -= 1;
+  }
+  setLocalStorage();
+  renderCart();
+  renderQuantity();
+};
+
+window.increaseItem = (id) => {
+  const idx = findIndexbyId(id);
+  cart[idx].quantity += 1;
+  setLocalStorage();
+  renderCart();
+  renderQuantity();
+};
+
+window.deleteProduct = (id) => {
+  const idx = findIndexbyId(id);
+  cart.splice(idx, 1);
+  setLocalStorage();
+  renderCart();
+  renderQuantity();
+};
+
+window.clearCart = () => {
+  if (cart.length === 0) {
+    alert("Không có hàng trong giỏ");
+  } else {
+    cart = [];
+    setLocalStorage();
+    renderCart();
+    renderQuantity();
+    alert("Xóa giỏ hàng thành công");
   }
 };
 
