@@ -141,6 +141,7 @@ header.productHeader {
   font-size: 20px;
   margin: 0;
   font-weight: 900;
+  height: 50px;
 }
 
 .in-stock {

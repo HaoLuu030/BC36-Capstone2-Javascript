@@ -12,11 +12,13 @@ const findIndexbyId = (id) => {
 
 let productList = [];
 let cart = [];
+
 //get product list from dtb
 const getProductList = () => {
   productService.getList().then((response) => {
     productList = [...response.data];
     renderProductList();
+    renderType();g
   });
 };
 //render product list
@@ -215,7 +217,7 @@ window.renderCart = () => {
   }
   const footerContent = `           
 <div class="total">
-  <span>Total: $ ${priceSum}</span>
+  <span>Tổng cộng: $ ${priceSum}</span>
 </div>
 
 <div class="modal-buttons">
@@ -292,7 +294,7 @@ window.purchase = () => {
   }
 };
 
-window.renderType = () => {
+const renderType = () => {
   let typeList = [
     ...productList.reduce((total, element) => {
       if (!total.includes(element.type)) {

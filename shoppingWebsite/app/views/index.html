@@ -41,13 +41,11 @@
         <nav class="navbar justify-content-end">
           <div class="justify-content-end" id="navbarSupportedContent">
             <div class="right d-flex align-items-center">
-              <button
-                onclick="renderType()"
-                data-toggle="modal"
-                data-target="#searchModal"
-                class="btn-style cart-btn pr-3"
-              >
+              <button class="btn-style cart-btn search-btn pr-3">
                 <i class="fa-solid fa-magnifying-glass"></i>
+                <form>
+                  <select name="Type" id="dropdown-list"></select>
+                </form>
               </button>
               <button
                 data-toggle="modal"
@@ -122,29 +120,6 @@
       </div>
     </div>
     <!-- Cart modal end-->
-    <!-- Search modal -->
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="searchModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
-              Vui lòng chọn loại sản phẩm
-            </h5>
-            <form>
-              <select name="Type" id="dropdown-list"></select>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Search modal end -->
 
     <!-- Axios -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
