@@ -54,6 +54,32 @@ header.productHeader {
   align-items: center;
 }
 
+.search-btn {
+  position: relative;
+}
+
+.search-btn form {
+  height: 120%;
+  width: 0;
+  position: absolute;
+  top: 0;
+  right: 16px;
+  border-radius: 9px;
+  transition: all 0.3s;
+  visibility: hidden;
+}
+
+.search-btn:hover form {
+  width: 120px;
+  visibility: visible;
+}
+
+.search-btn form select {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
 .btn-style.cart-btn i {
   font-size: 30px;
   border: none;
@@ -302,14 +328,12 @@ span#inStock {
   color: brown;
 }
 
-.modal-buttons button, .modal-buttons {
+.modal-buttons button,
+.modal-buttons {
   display: flex;
   align-items: center;
   gap: 5px;
-} 
-
- 
-
+}
 
 /* Media queries */
 
