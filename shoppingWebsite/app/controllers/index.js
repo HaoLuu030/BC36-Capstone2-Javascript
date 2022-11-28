@@ -331,4 +331,5 @@ domId("dropdown-list").onchange = (event) => {
 window.onload = () => {
   getProductList();
   renderQuantity();
+  renderCart();
 };
