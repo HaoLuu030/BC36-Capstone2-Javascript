@@ -17,7 +17,6 @@ let cart = [];
 const getProductList = () => {
   productService.getList().then((response) => {
     productList = [...response.data];
-    renderQuantity();
     renderProductList();
     renderType();
   });
@@ -162,6 +161,7 @@ const getLocalStorage = () => {
       return new CartItem(element.item, element.quantity);
     });
   }
+  return [];
 };
 
 window.renderCart = () => {
