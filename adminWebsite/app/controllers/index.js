@@ -1,160 +1,172 @@
+import { ProductService } from "../services/product.js";
+import { Product } from "../models/product.js";
+//Changed all the var declaration into let or const declaration
+let productList = [];
+// Created new service to the product list
+const productService = new ProductService();
 
+// Added resusable function for cleaner code
+const domId = (id) => document.getElementById(id);
 
+//get the list from database
 
-var itemList = [];
+const getProductList = () => {
+  productService.getList().then((response) => {
+    productList = [...response.data];
+    renderProductList(productList);
+  });
+};
 
-function itemListData(){
-    var id1 = document.getElementById("id").value ;
-    var name1 = document.getElementById("name").value ;
-    var price1 = +document.getElementById("price").value ;
-    var screen1 = document.getElementById("screen").value ;
-    var backCamera1 = document.getElementById("BackCamera").value;
-    var frontCamera1 = document.getElementById("FrontCamera").value ;
-    var img1 = document.getElementById("picture").value;
-    var desc1 = document.getElementById("discribe").value ;
-    var type1 = document.getElementById("type").value ;
-    // var action = document.getElementById("action").vlaue ;
-    // var name = document.getElementById("name").vlaue ;
-    // var name = document.getElementById("name").vlaue ;
-    
-    var Item = new ItemList(
-        id1,
-        name1,
-        price1,
-        screen1,
-        backCamera1,
-        frontCamera1,
-        img1,
-        desc1,
-        type1
-    );
+//Change variable name "item" into "product"
+domId("addBtn").onclick = () => {
+  domId("modalTitle").innerHTML = "Thêm sản phẩm";
+  domId("modal-footer").innerHTML = `
+  <button type="button" class="btn btn-secondary close" data-dismiss="modal">Đóng</button>
+  <button type="button" class="btn btn-success" onclick="addProduct()">Thêm</button></button>`;
+};
 
-   itemList.push(Item);
-   renderItem(itemList);
-//    saveData();
+window.addProduct = () => {
+  let id = domId("id").value;
+  let name = domId("name").value;
+  let price = domId("price").value;
+  let screen = domId("screen").value;
+  let backCamera = domId("backCamera").value;
+  let frontCamera = domId("frontCamera").value;
+  let img = domId("img").value;
+  let desc = domId("desc").value;
+  let type = domId("type").value;
+
+  let product = new Product(
+    id,
+    name,
+    price,
+    screen,
+    backCamera,
+    frontCamera,
+    img,
+    desc,
+    type
+  );
+
+  productService.addProduct(product);
+  alert("Thêm sản phẩm thành công");
+  getProductList();
+};
+
+function renderProductList(data = productList) {
+  //changed "for" loop to higher order function for cleaner code
+  let html = data.reduce((total, element) => {
+    total += `<tr>
+    <td>${element.id}</td>
+    <td>${element.name}</td>
+    <td>$ ${element.price}</td>
+    <td>${element.img}</td>
+    <td>${element.desc}</td>
+    <td>
+    <button onclick="getUpdateForm('${element.id}')" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">Sửa</button>
+    <button onclick="deleteProduct('${element.id}')" class="btn btn-danger">Xóa</button>
+    </td>
+    </tr>`;
+
+    return total;
+  }, "");
+
+  domId("tableDanhSach").innerHTML = html;
 }
 
-function renderItem(itemList){
-    var html = "";
-   for( var i=0 ; i < itemList.length ; i++ ){
-   html += ` 
-   <tr>
-   <td>${itemList[i].id1}</td>
-   <td>${itemList[i].name1}</td>
-   <td>${itemList[i].price1}</td>
-   <td>${itemList[i].img1}</td>
-   <td>${itemList[i].desc1}</td>
-   <td><button onclick="deleteItem('${itemList[i].id1}')" class="btn btn-danger">Xoa</button>
-   <button onclick="getDataForm('${itemList[i].id1}')" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Sua</button>
-   </td>
-   </tr>
-   `;
-   }
+window.deleteProduct = (id) => {
+  productService.deleteProduct(id);
+  alert("Xóa sản phẩm thành công");
+  getProductList();
+};
 
-  
+window.getUpdateForm = (id) => {
+  domId("modalTitle").innerHTML = "Cập nhật sản phẩm";
 
-   document.getElementById("tableDanhSach").innerHTML = html;
-   /* <td> <button onclick="DeleteStaff('${data[i].staffTK}')" class="btn btn-danger"> Xoa </button>
-   <td> <button data-target="#myModal" data-toggle="modal" onclick="GetDataForm('${data[i].staffTK}')" class="btn btn-danger"> Sua </button> */
-   }
+  domId("modal-footer").innerHTML = `
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+  <button type="button" class="btn btn-primary" onclick="updateProduct(${id})">Cập nhật</button></button>`;
+  domId("id").disabled = true; // nguoi dung khong sua dc id
 
-  function findData(id){
+  // var index = findData(id);
+  // if (index === -1) {
+  //   alert("không tìm thấy id phù hợp");
+  //   return;
+  // }
+  productService.getProductbyId(id).then((response) => {
+    const selectedProduct = response.data;
+    domId("id").value = selectedProduct.id;
+    domId("name").value = selectedProduct.name;
+    domId("price").value = selectedProduct.price;
+    domId("screen").value = selectedProduct.screen;
+    domId("backCamera").value = selectedProduct.backCamera;
+    domId("frontCamera").value = selectedProduct.frontCamera;
+    domId("img").value = selectedProduct.img;
+    domId("desc").value = selectedProduct.desc;
+    domId("type").value = selectedProduct.type;
+  });
+};
 
-   for( var i=0 ; i<itemList.length; i++){
-  if(itemList[i].id1 == id){
-    return i ;
-  } }return -1;
+window.updateProduct = (id) => {
+  let name = domId("name").value;
+  let price = domId("price").value;
+  let screen = domId("screen").value;
+  let backCamera = domId("backCamera").value;
+  let frontCamera = domId("frontCamera").value;
+  let img = domId("img").value;
+  let desc = domId("desc").value;
+  let type = domId("type").value;
 
-   }
+  let product = new Product(
+    id,
+    name,
+    price,
+    screen,
+    backCamera,
+    frontCamera,
+    img,
+    desc,
+    type
+  );
 
-  function deleteItem(id1){
-  var idItem = findData(id1);
- if(idItem === -1){
-    console.log(" khong tim thay id phu hop")
- return;
- }
-itemList.splice(idItem, 1);
-renderItem(itemList);
+  productService.updateProduct(id, product).then(() => {
+    document.querySelector(".close").click();
+    alert("Cập nhật thành công");
+    getProductList();
+  });
 
-}
-function getDataForm(id)
-  {
-  var index = findData(id);
-  if(index === -1){
-    console.log("Khong tim thay id phu hop");
-    return;
-  }
- var dataItem = itemList[index];
-    document.getElementById("id").value = dataItem.id1 ;
-     document.getElementById("name").value =dataItem.name1;
-    document.getElementById("price").value =dataItem.price1;
-    document.getElementById("screen").value =dataItem.screen1;
-    document.getElementById("BackCamera").value =dataItem.backCamera1;
-    document.getElementById("FrontCamera").value =dataItem.frontCamera1;
-     document.getElementById("picture").value = dataItem.img1;
-     document.getElementById("discribe").value =dataItem.desc1;
-   document.getElementById("type").value = dataItem.type1 ;
-   document.getElementById("id").disabled = true; // nguoi dung khong sua dc id
-  }
- 
-  function updateData(){
-    var id1 = document.getElementById("id").value ;
-    var name1 = document.getElementById("name").value ;
-    var price1 = +document.getElementById("price").value ;
-    var screen1 = document.getElementById("screen").value ;
-    var backCamera1 = document.getElementById("BackCamera").value;
-    var frontCamera1 = document.getElementById("FrontCamera").value ;
-    var img1 = document.getElementById("picture").value;
-    var desc1 = document.getElementById("discribe").value ;
-    var type1 = document.getElementById("type").value ;
-  var index = findData(id1);
-  if(index === -1){
-    console.log("khong tim thay id phu hop");
-    return;
-  }
-  var dataItem = itemList[index];
-  dataItem.id1 = id1;
-  dataItem.name1= name1;
-  dataItem.price1 = price1;
-  dataItem.screen1=screen1;
-  dataItem.backCamera1= backCamera1 ; 
-  dataItem.frontCamera1 = frontCamera1 ;
-  dataItem.img1 = img1;
-  dataItem.desc1= desc1;
-  dataItem.type1 = type1;
-   renderItem (itemList);
-  
-   document.getElementById("QL").reset(); // reset form
-   document.getElementById("id").disabled = false;
+  // document.getElementById("QL").reset(); // reset form
+  // document.getElementById("id").disabled = false;
+};
 
-  }
+window.searchItem = () => {
+  const result = [];
+  const keyword = domId("searchName").value;
 
- function searchItem(){
+  const idRegex = /\d+/;
+  const nameRegex = /^[A-Za-z]/;
 
-
-        var result =[];
-        var keyword = document.getElementById("searchName").value;
-        
-        for(var i=0; i< itemList.length; i++){
-          var ID = itemList[i].id1;
-          var nameItem = itemList[i].name1;
-          if(ID.includes(keyword)||nameItem.includes(keyword)){
-            result.push(itemList[i]);
-          }
-          // else {
-          //   return("khong co tu trung khop")
-          // }
-        }
-        renderItem(result);
+  for (let i in productList) {
+    const id = productList[i].id;
+    const name = productList[i].name;
+    if (idRegex.test(keyword) && id.includes(keyword)) {
+      result.push(productList[i]);
+    } else if (
+      nameRegex.test(keyword) &&
+      name.toLowerCase().includes(keyword.toLowerCase())
+    ) {
+      result.push(productList[i]);
     }
+  }
 
- 
+  if (result.length === 0) {
+    alert("Không tìm thấy sản phẩm phù hợp");
+    return;
+  }
 
+  renderProductList(result);
+};
 
-
-   function saveData(){
-    // chuyen mot mang ojb sang mang JSON 
-    var JSONitemList = JSON.stringify(itemList);
-    localStorage.setItem("Data",JSONitemList);
-   }
-
+window.onload = () => {
+  getProductList();
+};
