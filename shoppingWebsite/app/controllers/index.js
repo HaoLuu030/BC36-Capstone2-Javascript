@@ -17,6 +17,7 @@ let cart = [];
 const getProductList = () => {
   productService.getList().then((response) => {
     productList = [...response.data];
+    renderQuantity();
     renderProductList();
     renderType();
   });
