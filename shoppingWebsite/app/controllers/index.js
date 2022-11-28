@@ -18,7 +18,7 @@ const getProductList = () => {
   productService.getList().then((response) => {
     productList = [...response.data];
     renderProductList();
-    renderType();g
+    renderType();
   });
 };
 //render product list
