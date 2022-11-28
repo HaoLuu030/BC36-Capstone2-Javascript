@@ -19,9 +19,11 @@ const getProductList = () => {
 
 //Change variable name "item" into "product"
 domId("addBtn").onclick = () => {
+  domId("QL").reset();
+  domId("id").disabled = false;
   domId("modalTitle").innerHTML = "Thêm sản phẩm";
   domId("modal-footer").innerHTML = `
-  <button type="button" class="btn btn-secondary close" data-dismiss="modal">Đóng</button>
+  <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Đóng</button>
   <button type="button" class="btn btn-success" onclick="addProduct()">Thêm</button></button>`;
 };
 
@@ -84,7 +86,7 @@ window.getUpdateForm = (id) => {
   domId("modalTitle").innerHTML = "Cập nhật sản phẩm";
 
   domId("modal-footer").innerHTML = `
-  <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+  <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Đóng</button>
   <button type="button" class="btn btn-primary" onclick="updateProduct(${id})">Cập nhật</button></button>`;
   domId("id").disabled = true; // nguoi dung khong sua dc id
 
@@ -130,13 +132,13 @@ window.updateProduct = (id) => {
   );
 
   productService.updateProduct(id, product).then(() => {
-    document.querySelector(".close").click();
+    document.querySelector(".close-btn").click();
     alert("Cập nhật thành công");
     getProductList();
   });
 
-  // document.getElementById("QL").reset(); // reset form
-  // document.getElementById("id").disabled = false;
+  domId("QL").reset(); // reset form
+  domId("id").disabled = false;
 };
 
 window.searchItem = () => {
@@ -166,6 +168,8 @@ window.searchItem = () => {
 
   renderProductList(result);
 };
+
+//validate stuff
 
 window.onload = () => {
   getProductList();
