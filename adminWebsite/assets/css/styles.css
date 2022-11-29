@@ -1,0 +1,31 @@
+*{
+    font-family: 'Lora', serif;
+  
+}
+.header {
+    margin: auto;
+    width: 80%;
+}
+.search-button {
+    width: 30%;
+}
+.search button {
+  height: 40px;
+  line-height: 20px;
+
+}
+.nav button{
+ color: blue;
+ font-weight: 500;
+}
+
+.modal-body,.modal-content modal-body form-control {
+    width: 100%;
+}
+
+.input-group-prepend , .input-group-text{
+    display: block;
+    border: none;
+    background-color: white;
+    text-align: left;
+}

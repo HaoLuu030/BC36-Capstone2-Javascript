@@ -23,3 +23,27 @@ export class Product {
 }
 
 
+
+// function ItemList(    id,
+//   name,
+//   price,
+//   screen,
+//   backCamera,
+//   frontCamera,
+//   img,
+//   desc,
+//   type)
+
+//    {
+//     this.id1 = id;
+//      this.name1 = name;
+//      this.price1 = price;
+//      this.screen1 = screen;
+//      this.backCamera1 = backCamera;
+//      this.frontCamera1 = frontCamera;
+//      this.img1 = img;
+//      this.desc1 = desc;
+//      this.type1 = type;
+//   }
+
+
