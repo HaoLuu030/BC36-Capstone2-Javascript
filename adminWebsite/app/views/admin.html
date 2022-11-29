@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quan Ly San Pham</title>
+    <!-- font-awesome  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Font  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap  -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+  </head>
+  <body>
+    <div class="header">
+      <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <a class="navbar-brand text-light" href="#">Navbar</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link text-light" href="#"
+                >Home <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white-50" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle text-white-50"
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Dropdown
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Action 1</a>
+                <a class="dropdown-item" href="#">Action 2</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="title h1 mt-3 mb-3">
+        <p>Quản lý sản phẩm</p>
+      </div>
+      <div class="container">
+        <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button
+              class="nav-link active"
+              id="nav-home-tab"
+              data-toggle="tab"
+              data-target="#nav-home"
+              type="button"
+              role="tab"
+              aria-controls="nav-home"
+              aria-selected="true"
+            >
+              Danh sach san pham
+            </button>
+            <button
+              class="nav-link"
+              id="nav-profile-tab"
+              data-toggle="tab"
+              data-target="#nav-profile"
+              type="button"
+              role="tab"
+              aria-controls="nav-profile"
+              aria-selected="false"
+            >
+              Danh sach nguoi dung
+            </button>
+            <button
+              class="nav-link"
+              id="nav-contact-tab"
+              data-toggle="tab"
+              data-target="#nav-contact"
+              type="button"
+              role="tab"
+              aria-controls="nav-contact"
+              aria-selected="false"
+            >
+              Thong ke
+            </button>
+          </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+          <div
+            class="tab-pane fade show active"
+            id="nav-home"
+            role="tabpanel"
+            aria-labelledby="nav-home-tab"
+          >
+            <div class="search d-flex justify-content-between mt-4">
+              <!-- button them moi  -->
+              <!-- Button trigger modal -->
+              <button
+                id="addBtn"
+                type="button"
+                class="btn btn-primary"
+                data-toggle="modal"
+                data-target="#exampleModal"
+              >
+                Thêm sản phẩm
+              </button>
+
+              <!-- Modal -->
+              <div
+                class="modal fade"
+                id="exampleModal"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalTitle"></h5>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <form role="form" id="QL">
+                      <div class="modal-body">
+                        <div class="input-group mb-3 d-block">
+                          <input
+                            id="id"
+                            type="text"
+                            class="form-control"
+                            aria-label="Username"
+                            aria-describedby="basic-addon1"
+                            placeholder="ID sản phẩm"
+                            style="width: 100%"
+                          />
+                        </div>
+                        <div class="input-group mb-3 d-block">
+                          <input
+                            id="name"
+                            type="text"
+                            class="form-control"
+                            placeholder="Tên sản phẩm"
+                            aria-label="Username"
+                            aria-describedby="basic-addon1"
+                            style="width: 100%"
+                          />
+                        </div>
+
+                        <div class="input-group mb-3 d-block">
+                          <input
+                            id="price"
+                            type="text"
+                            class="form-control"
+                            placeholder="Giá sản phẩm"
+                            aria-label="Username"
+                            aria-describedby="basic-addon1"
+                            style="width: 100%"
+                          />
+                        </div>
+
+                        <div class="input-group mb-3 d-block">
+                          <input
+                            id="img"
+                            type="text"
+                            class="form-control"
+                            placeholder="Link hình hảnh"
+                            aria-label="Username"
+                            aria-describedby="basic-addon1"
+                            style="width: 100%"
+                          />
+                        </div>
+                        <div class="input-group mb-3 d-block">
+                          <input
+                            id="screen"
+                            type="text"
+                            class="form-control"
+                            placeholder="Loại màn hình"
+                            aria-label="Username"
+                            aria-describedby="basic-addon1"
+                            style="width: 100%"
+                          />
+                        </div>
+                        <div class="input-group mb-3 d-block">
+                          <input
+                            id="backCamera"
+                            type="text"
+                            class="form-control"
+                            placeholder="Thông tin camera sau"
+                            aria-label="Username"
+                            aria-describedby="basic-addon1"
+                            style="width: 100%"
+                          />
+                        </div>
+                        <div class="input-group mb-3 d-block">
+                          <input
+                            id="frontCamera"
+                            type="text"
+                            class="form-control"
+                            placeholder="Thông tin camera trước"
+                            aria-label="Username"
+                            aria-describedby="basic-addon1"
+                            style="width: 100%"
+                          />
+                        </div>
+
+                        <div class="input-group mb-3 d-block">
+                          <select id="type" style="width: 100%">
+                            <option value="0">Chọn loại</option>
+                            <option value="Samsung">SamSung</option>
+                            <option value="iphone">Iphone</option>
+                          </select>
+                        </div>
+
+                        <div class="input-group d-block">
+                          <textarea
+                            id="desc"
+                            class="form-control"
+                            placeholder="Mô tả ngắn gọn về sản phẩm"
+                            aria-label="With textarea"
+                            style="width: 100%"
+                          ></textarea>
+                        </div>
+                      </div>
+                    </form>
+                    <div id="modal-footer" class="modal-footer"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- search  -->
+              <div class="search-button">
+                <div class="input-group mb-3">
+                  <input
+                    id="searchName"
+                    type="text"
+                    class="form-control"
+                    placeholder="Nhập ID hoặc tên sản phẩm"
+                    aria-label="Recipient's username"
+                    aria-describedby="button-addon2"
+                  />
+                  <div class="input-group-append">
+                    <button
+                      onclick="searchItem()"
+                      class="btn btn-outline-secondary bg-secondary text-light"
+                      type="button"
+                      id="button-addon2"
+                    >
+                      <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="table-total">
+              <table id="tableInformation" class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Tên sản phẩm</th>
+                    <th scope="col">Giá</th>
+                    <th scope="col">Hình ảnh</th>
+                    <th scope="col">Mô tả</th>
+                    <th scope="col">Tác vụ</th>
+                  </tr>
+                </thead>
+                <tbody id="tableDanhSach"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div
+            class="tab-pane fade"
+            id="nav-profile"
+            role="tabpanel"
+            aria-labelledby="nav-profile-tab"
+          >
+            Dang cap nhat...
+          </div>
+          <div
+            class="tab-pane fade"
+            id="nav-contact"
+            role="tabpanel"
+            aria-labelledby="nav-contact-tab"
+          >
+            Dang cap nhat...
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- Bootstrap  -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+      integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
+      crossorigin="anonymous"
+    ></script>
+
+    <script type="module" src="../controllers/index.js"></script>
+  </body>
+</html>
