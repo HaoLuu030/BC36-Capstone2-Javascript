@@ -31,7 +31,7 @@ const renderProductList = (data = productList) => {
         <img
           src="${element.img}"
           class="card-img-top"
-          alt="..."
+          alt="Ảnh bị lỗi rồi :("
         />
       </div>
       <div class="card-body productGallery__productContent">
