@@ -27,16 +27,65 @@ domId("addBtn").onclick = () => {
   <button type="button" class="btn btn-success" onclick="addProduct()">Thêm</button></button>`;
 };
 
+const getFormValue = () => {
+  const formValue = {
+    id: domId("id").value,
+    name: domId("name").value,
+    price: domId("price").value,
+    screen: domId("screen").value,
+    backCamera: domId("backCamera").value,
+    frontCamera: domId("frontCamera").value,
+    img: domId("img").value,
+    desc: domId("desc").value,
+    type: domId("type").value,
+  };
+
+  return formValue;
+};
+const validateForm = () => {
+  const formValue = getFormValue();
+  const { id, name, price, screen, backCamera, frontCamera, img, desc, type } =
+    formValue;
+  let isValid = true;
+  isValid &= required(id, "spanId") && validateId(id, "spanId");
+  isValid &=
+    required(name, "spanName") && validateProductName(name, "spanName");
+  isValid &= required(price, "spanPrice") && validatePrice(price, "spanPrice");
+  console.log(isValid);
+
+  isValid &= required(img, "spanImg") && validateImgInput(img, "spanImg");
+
+  isValid &=
+    required(screen, "spanScreen") && validateScreenType(screen, "spanScreen");
+
+  isValid &= required(backCamera, "spanBackCamera");
+
+  isValid &= required(frontCamera, "spanFrontCamera");
+
+  isValid &= required(desc, "spanDescription");
+  isValid &= validateProductType(type, "spanType");
+
+  return isValid;
+};
+
 window.addProduct = () => {
-  let id = domId("id").value;
-  let name = domId("name").value;
-  let price = domId("price").value;
-  let screen = domId("screen").value;
-  let backCamera = domId("backCamera").value;
-  let frontCamera = domId("frontCamera").value;
-  let img = domId("img").value;
-  let desc = domId("desc").value;
-  let type = domId("type").value;
+  const isValid = validateForm();
+  if (!isValid) {
+    return;
+  }
+  const id = domId("id").value;
+  //check if the product has already existed in the list
+  const hasExisted = productList.find((element) => element.id === id);
+  console.log(hasExisted);
+
+  if (hasExisted) {
+    alert("Id bị trùng lặp");
+    return;
+  }
+  //destructuring
+  const values = getFormValue();
+  const { name, price, screen, backCamera, frontCamera, img, desc, type } =
+    values;
 
   let product = new Product(
     id,
@@ -52,22 +101,24 @@ window.addProduct = () => {
 
   productService.addProduct(product);
   alert("Thêm sản phẩm thành công");
+  domId("QL").reset;
   getProductList();
 };
 
 function renderProductList(data = productList) {
   //changed "for" loop to higher order function for cleaner code
   let html = data.reduce((total, element) => {
-    total += `<tr>
-    <td>${element.id}</td>
-    <td>${element.name}</td>
-    <td>$ ${element.price}</td>
-    <td>${element.img}</td>
-    <td>${element.desc}</td>
-    <td>
-    <button onclick="getUpdateForm('${element.id}')" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">Sửa</button>
-    <button onclick="deleteProduct('${element.id}')" class="btn btn-danger">Xóa</button>
-    </td>
+    total += `
+    <tr>
+      <td>${element.id}</td>
+      <td>${element.name}</td>
+      <td>$ ${element.price}</td>
+      <td>${element.img}</td>
+      <td>${element.desc}</td>
+      <td>
+      <button onclick="getUpdateForm('${element.id}')" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">Sửa</button>
+      <button onclick="deleteProduct('${element.id}')" class="btn btn-danger">Xóa</button>
+      </td>
     </tr>`;
 
     return total;
@@ -87,14 +138,9 @@ window.getUpdateForm = (id) => {
 
   domId("modal-footer").innerHTML = `
   <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Đóng</button>
-  <button type="button" class="btn btn-primary" onclick="updateProduct(${id})">Cập nhật</button></button>`;
+  <button type="button" class="btn btn-primary" onclick="updateProduct()">Cập nhật</button></button>`;
   domId("id").disabled = true; // nguoi dung khong sua dc id
 
-  // var index = findData(id);
-  // if (index === -1) {
-  //   alert("không tìm thấy id phù hợp");
-  //   return;
-  // }
   productService.getProductbyId(id).then((response) => {
     const selectedProduct = response.data;
     domId("id").value = selectedProduct.id;
@@ -109,15 +155,11 @@ window.getUpdateForm = (id) => {
   });
 };
 
-window.updateProduct = (id) => {
-  let name = domId("name").value;
-  let price = domId("price").value;
-  let screen = domId("screen").value;
-  let backCamera = domId("backCamera").value;
-  let frontCamera = domId("frontCamera").value;
-  let img = domId("img").value;
-  let desc = domId("desc").value;
-  let type = domId("type").value;
+window.updateProduct = () => {
+  const values = getFormValue();
+
+  const { id, name, price, screen, backCamera, frontCamera, img, desc, type } =
+    values;
 
   let product = new Product(
     id,
@@ -134,11 +176,10 @@ window.updateProduct = (id) => {
   productService.updateProduct(id, product).then(() => {
     document.querySelector(".close-btn").click();
     alert("Cập nhật thành công");
+    domId("QL").reset(); // reset form
+    domId("id").disabled = false;
     getProductList();
   });
-
-  domId("QL").reset(); // reset form
-  domId("id").disabled = false;
 };
 
 window.searchItem = () => {
@@ -170,6 +211,86 @@ window.searchItem = () => {
 };
 
 //validate stuff
+
+const required = (value, spanId) => {
+  if (value.length === 0) {
+    domId(spanId).innerHTML = "*Trường này không được bỏ trống";
+    return false;
+  }
+  domId(spanId).innerHTML = "";
+  return true;
+};
+
+const validateId = (value, spanId) => {
+  const idRegex = /^\d*$/;
+  if (idRegex.test(value)) {
+    domId(spanId).innerHTML = "";
+    return true;
+  }
+  domId(spanId).innerHTML = "*Id chỉ được chứa các ký tự số";
+  return false;
+};
+
+const validateProductName = (value, spanId) => {
+  const nameRegex = /^\w{1}[A-Za-z0-9 ]*$/;
+  if (!nameRegex.test(value)) {
+    domId(spanId).innerHTML =
+      "*Tên sản phẩm phải bắt đầu bằng một chữ cái và không được chứa các ký tự đặc biệt";
+    return false;
+  } else if (value.length < 8) {
+    domId(spanId).innerHTML = "* Tên sản phẩm phải chứa ít nhất 8 ký tự";
+    return false;
+  }
+  domId(spanId).innerHTML = "";
+  return true;
+};
+
+const validatePrice = (value, spanId) => {
+  const priceRegex = /^\d*$/;
+  if (!priceRegex.test(value)) {
+    domId(spanId).innerHTML = "* Giá chỉ được nhập số";
+    return false;
+  } else if (value * 1 < 500 || value * 1 > 10000) {
+    domId(spanId).innerHTML =
+      "* Giá chỉ được nằm trong khoảng từ $500 đến $1000";
+    return false;
+  }
+  domId(spanId).innerHTML = "";
+  return true;
+};
+
+const validateImgInput = (value, spanId) => {
+  const imgRegex = /.*(.jpg||.jpeg||.png||>gif)$/i;
+  if (!imgRegex.test(value)) {
+    domId(spanId).innerHTML =
+      "link hình ảnh phải nhập định dạng (jpg, jpeg, png hay gif)";
+    return false;
+  }
+  domId(spanId).innerHTML = "";
+  return true;
+};
+
+const validateScreenType = (value, spanId) => {
+  const screenRegex = /screen \d+/i;
+  if (!screenRegex.test(value)) {
+    domId(spanId).innerHTML =
+      "Định dạng màn hình đúng: screen + [một số bất kỳ] (screen 57)";
+    return false;
+  }
+  domId(spanId).innerHTML = "";
+  return true;
+};
+
+const validateProductType = (value, spanId) => {
+  if (value == 0) {
+    domId(spanId).innerHTML = "*Vui lòng chọn loại cho sản phẩm";
+    return false;
+  }
+  console.log(1);
+
+  domId(spanId).innerHTML = "";
+  return true;
+};
 
 window.onload = () => {
   getProductList();
