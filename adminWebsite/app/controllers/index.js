@@ -146,9 +146,12 @@ window.getUpdateForm = (id) => {
 
   domId("modal-footer").innerHTML = `
 <<<<<<< HEAD
+<<<<<<< HEAD
   <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Đóng</button>
   <button type="button" class="btn btn-primary" onclick="updateProduct()">Cập nhật</button></button>`;
 =======
+=======
+>>>>>>> parent of afa1cb2 (small fixes)
   <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
   <button type="button" class="btn btn-primary" onclick="updateProduct(${id})">Cập nhật</button></button>`;
 >>>>>>> parent of afa1cb2 (small fixes)
@@ -201,6 +204,9 @@ window.updateProduct = () => {
 
   // document.getElementById("QL").reset(); // reset form
   // document.getElementById("id").disabled = false;
+<<<<<<< HEAD
+>>>>>>> parent of afa1cb2 (small fixes)
+=======
 >>>>>>> parent of afa1cb2 (small fixes)
 };
 
@@ -232,6 +238,7 @@ window.searchItem = () => {
   renderProductList(result);
 };
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 const renderType = (title = 0, target) => {
   let typeList = [
@@ -353,6 +360,8 @@ const validateProductType = (value, spanId) => {
   return true;
 };
 
+=======
+>>>>>>> parent of afa1cb2 (small fixes)
 =======
 >>>>>>> parent of afa1cb2 (small fixes)
 window.onload = () => {
