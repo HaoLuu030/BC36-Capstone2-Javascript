@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping website</title>
+    <!-- Boostrap 4 CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Source San Pro -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Animate CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="productHeader bg-dark">
+      <div class="container">
+        <nav class="navbar justify-content-end">
+          <div class="justify-content-end" id="navbarSupportedContent">
+            <div class="right d-flex align-items-center">
+              <button class="btn-style cart-btn search-btn pr-3">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <form>
+                  <select name="Type" id="dropdown-list"></select>
+                </form>
+              </button>
+              <button
+                data-toggle="modal"
+                data-target="#cartModal"
+                class="btn-style cart-btn"
+                onclick="renderCart()"
+              >
+                <i class="fa fa-shopping-cart">
+                  <span id="quantity"></span>
+                </i>
+              </button>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <div class="productGallery pt-5">
+      <div class="container">
+        <div id="productGallery" class="row"></div>
+      </div>
+    </div>
+
+    <!-- Details modal -->
+    <div
+      class="modal fade"
+      id="productDetails"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div id="details-modal" class="modal-dialog details-modal">
+        <div class="modal-content border-0">
+          <div class="modal-body pb-0" id="details-modal-body"></div>
+          <div id="details-modal-footer" class="modal-footer bg-dark"></div>
+        </div>
+      </div>
+    </div>
+    <!-- Details modal end -->
+
+    <!-- Cart modal -->
+    <div
+      class="modal fade"
+      id="cartModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog cartPopUp animate__animated animate__slideInRight"
+      >
+        <div class="modal-content cartPopUpContent">
+          <div class="modal-header cartPopUp-header">
+            <h5 class="modal-title" id="exampleModalLabel">Giỏ hàng</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table id="cart-modal-body"></table>
+          </div>
+          <div
+            id="cart-modal-footer"
+            class="modal-footer justify-content-around"
+          ></div>
+        </div>
+      </div>
+    </div>
+    <!-- Cart modal end-->
+
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- Bootstrap 4 JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Main JS -->
+    <script type="module" src="../controllers/index.js"></script>
+  </body>
+</html>

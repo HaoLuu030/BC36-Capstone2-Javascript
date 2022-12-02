@@ -1,0 +1,57 @@
++Admin Website:
+
+- models:
+  - Create Product class: Phúc, Hào
+  - Refactor Product class: Hào
+
+- services:
+  - getList, addProduct, deleteProduct, getProductbyId, updateProduct: Hào
+
+- controller:
+  - getProductList: Hào
+  - renderProductList: Hào
+  - addProduct: Phúc, Hào
+  - deleteProduct: Phúc, Hào
+  - updateProduct: Phúc, Hào
+  - searchItem: Hào
+  - validateName, validatePrice, validateImgInput, validateScreenType, validateProductType, validateForm: Hào
+  - filter: Hào
+  - renderType (used to insert type information (e.g. Samsung, iPhone) into select tags): Hào
+
+- views:
+  - HTML structure: Phúc, Hào
+  - HTML, CSS styling: Hào
+
++Shopping Website:
+
+- models:
+  - Create class CartItem: Hào
+
+- services:
+  - getList: Hào
+
+- controller:
+  - getProductList: Hào
+  - renderProductList: Hào
+  - openInfoModal (used to show details about the selected product): Hào
+  - addToCart: Hào
+  - setLocalStorage: Hào
+  - getLocalStorage: Hào
+  - renderCart: Hào
+  - renderQuantity: Hào
+  - increaseItem, decreaseItem (used to add or deduct item in the cart window): Hào
+  - deleteProduct: Hào
+  - purchase: Hào
+  - clearCart: Hào
+  - renderType: Hào
+
+- view:
+    - HTML structure: Hào
+    - HTML & CSS styling: Hào
+
+
++ Other tasks:
+ - Create directory structure: Hào
+ - Merge and manange branches: Hào
+ - Create README file: Hào
+ - Film the demonstration video: Hào

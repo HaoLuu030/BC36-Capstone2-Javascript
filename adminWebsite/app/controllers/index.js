@@ -14,6 +14,7 @@ const getProductList = () => {
   productService.getList().then((response) => {
     productList = [...response.data];
     renderProductList(productList);
+    renderType("Tất cả", "filter-list")
   });
 };
 
@@ -25,6 +26,7 @@ domId("addBtn").onclick = () => {
   domId("modal-footer").innerHTML = `
   <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Đóng</button>
   <button type="button" class="btn btn-success" onclick="addProduct()">Thêm</button></button>`;
+  renderType("Chọn loại", "type");
 };
 
 const getFormValue = () => {
@@ -110,14 +112,22 @@ function renderProductList(data = productList) {
   let html = data.reduce((total, element) => {
     total += `
     <tr>
-      <td>${element.id}</td>
-      <td>${element.name}</td>
-      <td>$ ${element.price}</td>
-      <td>${element.img}</td>
-      <td>${element.desc}</td>
-      <td>
-      <button onclick="getUpdateForm('${element.id}')" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">Sửa</button>
-      <button onclick="deleteProduct('${element.id}')" class="btn btn-danger">Xóa</button>
+      <td class="tb-cell">${element.id}</td>
+      <td class="tb-cell">${element.name}</td>
+      <td class="tb-cell">$ ${element.price}</td>
+      <td class="tb-cell">
+       - Màn hình: ${element.screen} <br>
+       - Camera trước: ${element.frontCamera} <br>
+       - Camera sau: ${element.backCamera}
+      </td>
+      <td class="tb-cell center-align">
+      <a href="${element.img}" target="_blank">Link</a>
+      </td>
+      <td class="tb-cell center-align">
+      <button onclick="getUpdateForm('${element.id}')" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
+      <i class="fa fa-pencil-alt"></i>
+      </button>
+      <button onclick="deleteProduct('${element.id}')" class="btn btn-danger"><i class="fa fa-trash-alt"></i></button>
       </td>
     </tr>`;
 
@@ -209,6 +219,41 @@ window.searchItem = () => {
 
   renderProductList(result);
 };
+
+const renderType = (purpose, target) => {
+  let typeList = [
+    ...productList.reduce((total, element) => {
+      if (!total.includes(element.type)) {
+        total.push(element.type);
+      }
+      return total;
+    }, []),
+  ];
+  const content = typeList.reduce((total, element) => {
+    total += `<option value="${element}">${element}</option>`;
+    return total;
+  }, "");
+
+  domId(target).innerHTML = `<option value='0'>${purpose}</option>`.concat(
+    content
+  );
+};
+
+domId("filter-list").onchange = (event) => {
+  const value = event.target.value;
+  const selectedProducts = productList.filter((element) => {
+    if (element.type === value) {
+      return true;
+    }
+
+    if (value == 0) {
+      return true;
+    }
+  });
+
+  renderProductList(selectedProducts);
+};
+
 
 //validate stuff
 

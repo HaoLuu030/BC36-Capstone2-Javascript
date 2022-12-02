@@ -4,15 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shopping website</title>
-    <!-- Boostrap 4 CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
-      crossorigin="anonymous"
-    />
-    <!-- Font Awesome -->
+    <title>Quan Ly San Pham</title>
+    <!-- font-awesome  -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
@@ -20,86 +13,152 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <!-- Source San Pro -->
+
+    <!-- Font  -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <!-- Animate CSS -->
+
+    <!-- Bootstrap  -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
     />
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="./shoppingWebsite/assets/css/styles.css" />
+
+    <link rel="stylesheet" href="./adminWebsite/assets/css/styles.css" />
   </head>
   <body>
-    <header class="productHeader bg-dark">
+    <div class="header bg-dark">
       <div class="container">
-        <nav class="navbar justify-content-end">
-          <div class="justify-content-end" id="navbarSupportedContent">
-            <div class="right d-flex align-items-center">
-              <button class="btn-style cart-btn search-btn pr-3">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <form>
-                  <select name="Type" id="dropdown-list"></select>
-                </form>
-              </button>
-              <button
-                data-toggle="modal"
-                data-target="#cartModal"
-                class="btn-style cart-btn"
-                onclick="renderCart()"
-              >
-                <i class="fa fa-shopping-cart">
-                  <span id="quantity"></span>
-                </i>
-              </button>
-            </div>
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <a class="navbar-brand text-light" href="#">Admin</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a
+                  class="nav-link text-light"
+                  href="../../../shoppingWebsite/app/view/shoppingWeb.html"
+                  >Shop <span class="sr-only">(current)</span></a
+                >
+              </li>
+            </ul>
           </div>
         </nav>
       </div>
-    </header>
-
-    <div class="productGallery pt-5">
-      <div class="container">
-        <div id="productGallery" class="row"></div>
-      </div>
     </div>
 
-    <!-- Details modal -->
-    <div
-      class="modal fade"
-      id="productDetails"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div id="details-modal" class="modal-dialog details-modal">
-        <div class="modal-content border-0">
-          <div class="modal-body pb-0" id="details-modal-body"></div>
-          <div id="details-modal-footer" class="modal-footer bg-dark"></div>
+    <div class="content">
+      <div class="container">
+        <div class="title mt-5">
+          <p>Quản lý sản phẩm</p>
+        </div>
+
+        <div class="tab-content" id="nav-tabContent">
+          <div
+            class="tab-pane fade show active"
+            id="nav-home"
+            role="tabpanel"
+            aria-labelledby="nav-home-tab"
+          >
+            <div class="button-container d-flex justify-content-end mt-4">
+              <!-- Filter button -->
+              <div class="filter-button-container d-flex">
+                <form>
+                  <select id="filter-list"></select>
+                </form>
+
+                <button class="btn btn-warning btn-style filter-button">
+                  <i class="fa fa-filter"></i>
+                </button>
+              </div>
+              <!-- Filter button end-->
+              <!-- Search bar & search button -->
+              <div class="search-button-container">
+                <div class="input-group mb-3">
+                  <input
+                    id="searchName"
+                    type="text"
+                    class="form-control"
+                    placeholder="Nhập ID hoặc tên sản phẩm"
+                    aria-label="Recipient's username"
+                    aria-describedby="button-addon2"
+                  />
+                  <div class="input-group-append">
+                    <button
+                      onclick="searchItem()"
+                      class="btn btn-secondary text-light btn-style search-button"
+                      type="button"
+                      id="button-addon2"
+                    >
+                      <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Search bar & search button end -->
+
+              <!-- Add button -->
+              <button
+                id="addBtn"
+                type="button"
+                class="btn btn-info btn-style"
+                data-toggle="modal"
+                data-target="#exampleModal"
+              >
+                <i class="fa fa-plus"></i>
+              </button>
+
+              <!-- Add button end -->
+            </div>
+            <div class="table-total">
+              <table id="tableInformation" class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th class="tb-cell">ID</th>
+                    <th class="tb-cell">Tên sản phẩm</th>
+                    <th class="tb-cell">Giá</th>
+                    <th class="tb-cell">Thông tin chung</th>
+                    <th class="tb-cell">Hình ảnh</th>
+                    <th class="tb-cell">Tác vụ</th>
+                  </tr>
+                </thead>
+                <tbody id="tableDanhSach"></tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <!-- Details modal end -->
 
-    <!-- Cart modal -->
+    <!-- Modal -->
     <div
       class="modal fade"
-      id="cartModal"
+      id="exampleModal"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div
-        class="modal-dialog cartPopUp animate__animated animate__slideInRight"
-      >
-        <div class="modal-content cartPopUpContent">
-          <div class="modal-header cartPopUp-header">
-            <h5 class="modal-title" id="exampleModalLabel">Giỏ hàng</h5>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle"></h5>
             <button
               type="button"
               class="close"
@@ -109,32 +168,133 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-            <table id="cart-modal-body"></table>
-          </div>
-          <div
-            id="cart-modal-footer"
-            class="modal-footer justify-content-around"
-          ></div>
+          <form role="form" id="QL">
+            <div class="modal-body">
+              <div class="input-group mb-3 d-block">
+                <input
+                  id="id"
+                  type="text"
+                  class="form-control"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  placeholder="ID sản phẩm"
+                  style="width: 100%"
+                />
+                <span id="spanId" class="text-danger"></span>
+              </div>
+              <div class="input-group mb-3 d-block">
+                <input
+                  id="name"
+                  type="text"
+                  class="form-control"
+                  placeholder="Tên sản phẩm"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  style="width: 100%"
+                /><span id="spanName" class="text-danger"></span>
+              </div>
+
+              <div class="input-group mb-3 d-block">
+                <input
+                  id="price"
+                  type="text"
+                  class="form-control"
+                  placeholder="Giá sản phẩm"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  style="width: 100%"
+                /><span id="spanPrice" class="text-danger"></span>
+              </div>
+
+              <div class="input-group mb-3 d-block">
+                <input
+                  id="img"
+                  type="text"
+                  class="form-control"
+                  placeholder="Link hình hảnh"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  style="width: 100%"
+                /><span id="spanImg" class="text-danger"></span>
+              </div>
+              <div class="input-group mb-3 d-block">
+                <input
+                  id="screen"
+                  type="text"
+                  class="form-control"
+                  placeholder="Loại màn hình"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  style="width: 100%"
+                />
+                <span id="spanScreen" class="text-danger"></span>
+              </div>
+              <div class="input-group mb-3 d-block">
+                <input
+                  id="backCamera"
+                  type="text"
+                  class="form-control"
+                  placeholder="Thông tin camera sau"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  style="width: 100%"
+                /><span id="spanBackCamera" class="text-danger"></span>
+              </div>
+              <div class="input-group mb-3 d-block">
+                <input
+                  id="frontCamera"
+                  type="text"
+                  class="form-control"
+                  placeholder="Thông tin camera trước"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  style="width: 100%"
+                /><span id="spanFrontCamera" class="text-danger"></span>
+              </div>
+
+              <div class="input-group mb-3 d-block">
+                <select id="type" style="width: 100%"></select>
+                <span id="spanType" class="text-danger"></span>
+              </div>
+
+              <div class="input-group d-block">
+                <textarea
+                  id="desc"
+                  class="form-control"
+                  placeholder="Mô tả ngắn gọn về sản phẩm"
+                  aria-label="With textarea"
+                  style="width: 100%"
+                ></textarea>
+                <span id="spanDescription" class="text-danger"></span>
+              </div>
+            </div>
+          </form>
+          <div id="modal-footer" class="modal-footer"></div>
         </div>
       </div>
     </div>
-    <!-- Cart modal end-->
-
     <!-- Axios -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <!-- Bootstrap 4 JS -->
+    <!-- Bootstrap  -->
     <script
       src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
       crossorigin="anonymous"
     ></script>
     <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
       crossorigin="anonymous"
     ></script>
-    <!-- Main JS -->
-    <script type="module" src="./shoppingWebsite/app/controllers/index.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+      integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      type="module"
+      src="./adminWebsite/app/controllers/index.js"
+    ></script>
   </body>
 </html>
