@@ -25,15 +25,8 @@ const getProductList = () => {
 const renderProductList = (data = productList) => {
   const html = domId("productGallery");
   const content = data.reduce((total, element) => {
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     total += `<div class="col-12 col-sm-6 col-lg-3 px-2 mb-lg-3">
-=======
-    total += `<div class="col-12 col-sm-6 col-lg-3 px-2">
->>>>>>> parent of afa1cb2 (small fixes)
-=======
-    total += `<div class="col-12 col-sm-6 col-lg-3 px-2">
->>>>>>> parent of afa1cb2 (small fixes)
     <div class="card productGallery__productItem">
       <div class="img-container">
         <img
