@@ -20,6 +20,11 @@ const getProductList = () => {
 
 //Change variable name "item" into "product"
 domId("addBtn").onclick = () => {
+  domId("QL").reset();
+  domId("id").disabled = false;
+  document.querySelectorAll(".errorSpan").forEach((element) => {
+    element.innerHTML = "";
+  });
   domId("modalTitle").innerHTML = "Thêm sản phẩm";
   domId("modal-footer").innerHTML = `
   <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Đóng</button>
@@ -101,7 +106,7 @@ window.addProduct = () => {
 
   productService.addProduct(product);
   alert("Thêm sản phẩm thành công");
-  domId("QL").reset;
+  domId("QL").reset();
   getProductList();
 };
 
@@ -155,7 +160,6 @@ window.getUpdateForm = (id) => {
 
   productService.getProductbyId(id).then((response) => {
     const selectedProduct = response.data;
-    console.log(selectedProduct);
     domId("id").value = selectedProduct.id;
     domId("name").value = selectedProduct.name;
     domId("price").value = selectedProduct.price;
@@ -169,6 +173,10 @@ window.getUpdateForm = (id) => {
 };
 
 window.updateProduct = () => {
+  const isValid = validateForm();
+  if (!isValid) {
+    return;
+  }
   const values = getFormValue();
 
   const { id, name, price, screen, backCamera, frontCamera, img, desc, type } =
@@ -314,10 +322,10 @@ const validatePrice = (value, spanId) => {
 };
 
 const validateImgInput = (value, spanId) => {
-  const imgRegex = /.*(.jpg||.jpeg||.png||>gif)$/i;
+  const imgRegex = /.*(\.jpg|\.jpeg|\.png|\.gif)$/i;
   if (!imgRegex.test(value)) {
     domId(spanId).innerHTML =
-      "link hình ảnh phải nhập định dạng (jpg, jpeg, png hay gif)";
+      "*Link hình ảnh phải nhập định dạng (jpg, jpeg, png hay gif)";
     return false;
   }
   domId(spanId).innerHTML = "";
