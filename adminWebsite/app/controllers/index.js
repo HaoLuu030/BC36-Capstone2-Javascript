@@ -22,7 +22,7 @@ const getProductList = () => {
 domId("addBtn").onclick = () => {
   domId("modalTitle").innerHTML = "Thêm sản phẩm";
   domId("modal-footer").innerHTML = `
-  <button type="button" class="btn btn-secondary close" data-dismiss="modal">Đóng</button>
+  <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Đóng</button>
   <button type="button" class="btn btn-success" onclick="addProduct()">Thêm</button></button>`;
   renderType("Chọn loại", "type");
 };
@@ -187,7 +187,7 @@ window.updateProduct = () => {
   );
 
   productService.updateProduct(id, product).then(() => {
-    document.querySelector(".close").click();
+    document.querySelector(".btn-close").click();
     alert("Cập nhật thành công");
     domId("QL").reset(); // reset form
     domId("id").disabled = false;
