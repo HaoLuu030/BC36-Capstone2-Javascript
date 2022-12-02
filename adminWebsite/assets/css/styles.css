@@ -21,7 +21,7 @@
   font-weight: 900;
 }
 
-.header .nav-item a{
+.header .nav-item a {
   font-size: 18px;
 }
 
@@ -33,13 +33,13 @@
 /* filter button */
 
 select#filter-list {
-  width: 0;
+  width: 50px;
   height: 50px;
-  margin-right: -51px;
   border-radius: 25px;
-  visibility: hidden;
-  transition: width 0.5s, visibility 0.1s;
   padding-left: 20px;
+  transform: translate(50px);
+  visibility: hidden;
+  transition: all 0.5s;
 }
 
 .filter-button-container:hover select#filter-list {
