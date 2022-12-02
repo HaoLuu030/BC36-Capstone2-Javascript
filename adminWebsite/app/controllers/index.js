@@ -145,16 +145,10 @@ window.getUpdateForm = (id) => {
   domId("modalTitle").innerHTML = "Cập nhật sản phẩm";
 
   domId("modal-footer").innerHTML = `
-<<<<<<< HEAD
-<<<<<<< HEAD
+
   <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Đóng</button>
   <button type="button" class="btn btn-primary" onclick="updateProduct()">Cập nhật</button></button>`;
-=======
-=======
->>>>>>> parent of afa1cb2 (small fixes)
-  <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-  <button type="button" class="btn btn-primary" onclick="updateProduct(${id})">Cập nhật</button></button>`;
->>>>>>> parent of afa1cb2 (small fixes)
+
   domId("id").disabled = true; // nguoi dung khong sua dc id
 
   renderType(0, "type");
@@ -199,15 +193,9 @@ window.updateProduct = () => {
     domId("id").disabled = false;
     getProductList();
   });
-<<<<<<< HEAD
-=======
 
   // document.getElementById("QL").reset(); // reset form
   // document.getElementById("id").disabled = false;
-<<<<<<< HEAD
->>>>>>> parent of afa1cb2 (small fixes)
-=======
->>>>>>> parent of afa1cb2 (small fixes)
 };
 
 window.searchItem = () => {
@@ -238,8 +226,6 @@ window.searchItem = () => {
   renderProductList(result);
 };
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 const renderType = (title = 0, target) => {
   let typeList = [
     ...productList.reduce((total, element) => {
@@ -360,10 +346,6 @@ const validateProductType = (value, spanId) => {
   return true;
 };
 
-=======
->>>>>>> parent of afa1cb2 (small fixes)
-=======
->>>>>>> parent of afa1cb2 (small fixes)
 window.onload = () => {
   getProductList();
 };
