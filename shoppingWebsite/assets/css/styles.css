@@ -6,7 +6,7 @@
 
 html,
 body {
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: "Lora", serif;
 }
 
 .btn-style {
@@ -32,6 +32,22 @@ body {
 .btn-style:hover i {
   background: gray;
   color: white;
+}
+
+.shop-logo {
+  font-size: 50px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+header .nav-item a {
+  font-size: 18px;
+  margin-right: 5px;
+}
+
+header .nav-item.active a {
+  color: #f2aa4cff !important;
+  text-decoration: none;
 }
 
 .img-container {

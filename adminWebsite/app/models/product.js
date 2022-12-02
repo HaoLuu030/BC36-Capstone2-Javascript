@@ -22,8 +22,6 @@ export class Product {
   }
 }
 
-
-
 // function ItemList(    id,
 //   name,
 //   price,
@@ -45,5 +43,3 @@ export class Product {
 //      this.desc1 = desc;
 //      this.type1 = type;
 //   }
-
-

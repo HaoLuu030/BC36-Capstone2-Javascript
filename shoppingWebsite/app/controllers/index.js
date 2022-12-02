@@ -25,7 +25,7 @@ const getProductList = () => {
 const renderProductList = (data = productList) => {
   const html = domId("productGallery");
   const content = data.reduce((total, element) => {
-    total += `<div class="col-12 col-sm-6 col-lg-3 px-2 mb-lg-2">
+    total += `<div class="col-12 col-sm-6 col-lg-3 px-2 mb-lg-3">
     <div class="card productGallery__productItem">
       <div class="img-container">
         <img

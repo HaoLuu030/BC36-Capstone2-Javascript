@@ -14,7 +14,7 @@ const getProductList = () => {
   productService.getList().then((response) => {
     productList = [...response.data];
     renderProductList(productList);
-    renderType("Tất cả", "filter-list")
+    renderType("Tất cả", "filter-list");
   });
 };
 
@@ -151,8 +151,11 @@ window.getUpdateForm = (id) => {
   <button type="button" class="btn btn-primary" onclick="updateProduct()">Cập nhật</button></button>`;
   domId("id").disabled = true; // nguoi dung khong sua dc id
 
+  renderType(0, "type");
+
   productService.getProductbyId(id).then((response) => {
     const selectedProduct = response.data;
+    console.log(selectedProduct);
     domId("id").value = selectedProduct.id;
     domId("name").value = selectedProduct.name;
     domId("price").value = selectedProduct.price;
@@ -220,7 +223,7 @@ window.searchItem = () => {
   renderProductList(result);
 };
 
-const renderType = (purpose, target) => {
+const renderType = (title = 0, target) => {
   let typeList = [
     ...productList.reduce((total, element) => {
       if (!total.includes(element.type)) {
@@ -234,9 +237,13 @@ const renderType = (purpose, target) => {
     return total;
   }, "");
 
-  domId(target).innerHTML = `<option value='0'>${purpose}</option>`.concat(
-    content
-  );
+  if (title) {
+    domId(target).innerHTML = `<option value='0'>${title}</option>`.concat(
+      content
+    );
+  } else {
+    domId(target).innerHTML = content;
+  }
 };
 
 domId("filter-list").onchange = (event) => {
@@ -253,7 +260,6 @@ domId("filter-list").onchange = (event) => {
 
   renderProductList(selectedProducts);
 };
-
 
 //validate stuff
 

@@ -16,6 +16,20 @@
   gap: 10px;
 }
 
+.admin-logo {
+  font-size: 35px;
+  font-weight: 900;
+}
+
+.header .nav-item a{
+  font-size: 18px;
+}
+
+.header .nav-item.active a {
+  color: #f2aa4cff !important;
+  text-decoration: none;
+}
+
 /* filter button */
 
 select#filter-list {
