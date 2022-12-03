@@ -49,11 +49,9 @@ const validateForm = () => {
   const formValue = getFormValue();
   const { name, price, screen, backCamera, frontCamera, img, desc, type } =
     formValue;
-  console.log(name);
   let isValid = true;
   isValid &=
     required(name, "spanName") && validateProductName(name, "spanName");
-  console.log(isValid);
   isValid &= required(price, "spanPrice") && validatePrice(price, "spanPrice");
 
   isValid &= required(img, "spanImg") && validateImgInput(img, "spanImg");
@@ -172,9 +170,7 @@ window.getUpdateForm = (id) => {
 
 window.updateProduct = (id) => {
   const isValid = validateForm();
-  console.log(isValid);
   if (!isValid) {
-    console.log("got here");
     return;
   }
   const values = getFormValue();
@@ -284,7 +280,6 @@ const required = (value, spanId) => {
 
 const validateProductName = (value, spanId) => {
   const nameRegex = /^[a-zA-Z]{1}[A-Za-z0-9 ]*$/;
-  console.log(nameRegex.test(value));
   if (!nameRegex.test(value)) {
     domId(spanId).innerHTML =
       "*Tên sản phẩm phải bắt đầu bằng chữ cái và không được chứa các ký tự đặc biệt";
