@@ -49,11 +49,12 @@ const validateForm = () => {
   const formValue = getFormValue();
   const { name, price, screen, backCamera, frontCamera, img, desc, type } =
     formValue;
+  console.log(name);
   let isValid = true;
   isValid &=
     required(name, "spanName") && validateProductName(name, "spanName");
-  isValid &= required(price, "spanPrice") && validatePrice(price, "spanPrice");
   console.log(isValid);
+  isValid &= required(price, "spanPrice") && validatePrice(price, "spanPrice");
 
   isValid &= required(img, "spanImg") && validateImgInput(img, "spanImg");
 
@@ -81,8 +82,9 @@ window.addProduct = () => {
     values;
 
   // check if the product has already existed in the list
-  const hasExisted = productList.find((element) => {return element.name === name});
-  console.log(hasExisted)
+  const hasExisted = productList.find((element) => {
+    return element.name === name;
+  });
 
   if (hasExisted) {
     alert("Đã có thông tin của sản phẩm này trong kho");
@@ -170,7 +172,9 @@ window.getUpdateForm = (id) => {
 
 window.updateProduct = (id) => {
   const isValid = validateForm();
+  console.log(isValid);
   if (!isValid) {
+    console.log("got here");
     return;
   }
   const values = getFormValue();
@@ -279,10 +283,11 @@ const required = (value, spanId) => {
 };
 
 const validateProductName = (value, spanId) => {
-  const nameRegex = /^\w{1}[A-Za-z0-9 ]*$/;
+  const nameRegex = /^[a-zA-Z]{1}[A-Za-z0-9 ]*$/;
+  console.log(nameRegex.test(value));
   if (!nameRegex.test(value)) {
     domId(spanId).innerHTML =
-      "*Tên sản phẩm phải bắt đầu bằng một chữ cái và không được chứa các ký tự đặc biệt";
+      "*Tên sản phẩm phải bắt đầu bằng chữ cái và không được chứa các ký tự đặc biệt";
     return false;
   }
   domId(spanId).innerHTML = "";
@@ -330,7 +335,6 @@ const validateProductType = (value, spanId) => {
     domId(spanId).innerHTML = "*Vui lòng chọn loại cho sản phẩm";
     return false;
   }
-  console.log(1);
 
   domId(spanId).innerHTML = "";
   return true;
