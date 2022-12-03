@@ -149,6 +149,10 @@ window.deleteProduct = (id) => {
 window.getUpdateForm = (id) => {
   domId("modalTitle").innerHTML = "Cập nhật sản phẩm";
 
+  document.querySelectorAll(".errorSpan").forEach((element) => {
+    element.innerHTML = "";
+  });
+
   domId("modal-footer").innerHTML = `
   <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Đóng</button>
   <button type="button" class="btn btn-primary" onclick="updateProduct(${id})">Cập nhật</button></button>`;
